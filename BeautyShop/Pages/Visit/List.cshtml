@@ -39,7 +39,7 @@
                                 <td>@x</td>
                                 <td>@visit.Customer.Name</td>
                                 <td>@visit.Customer.Membership?.Type</td>
-                                <td>$ @visit.Pay</td>
+                                <td>$ @Model.GetPrice(visit)</td>
                             </tr>
                             x++;
                         }
@@ -68,7 +68,7 @@
                                 <td>@y</td>
                                 <td>@visit.First().Customer.Name</td>
                                 <td>@visit.First().Customer.Membership?.Type</td>
-                                <td>$ @visit.Sum(x => x.Pay)</td>
+                                <td>$ @visit.Sum(x => Model.GetPrice(x))</td>
                             </tr>
                             y++;
                         }

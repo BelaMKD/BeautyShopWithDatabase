@@ -36,6 +36,7 @@ namespace BeautyShop.Data.InDatabase
             return beautyShopDbContext.Visits
                 .Include(x=>x.Customer.Membership)
                 .Include(x=>x.Customer)
+                .Include(x=>x.ShopItems)
                 .Where(x => string.IsNullOrEmpty(name) || x.Customer.Name.StartsWith(name)).ToList();
         }
     }

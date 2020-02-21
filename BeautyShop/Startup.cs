@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeautyShop.Core;
 using BeautyShop.Data;
 using BeautyShop.Data.InDatabase;
 using BeautyShop.Data.InMemory;
@@ -31,6 +32,7 @@ namespace BeautyShop
             services.AddScoped<IMembrship, MembershipSQL>();
             services.AddScoped<ICustomer, CustomerSQL>();
             services.AddScoped<IVisit, VisitSQL>();
+            services.AddScoped<VisitTP>();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddDbContextPool<BeautyShopDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("BeautyShopDb")));
         }

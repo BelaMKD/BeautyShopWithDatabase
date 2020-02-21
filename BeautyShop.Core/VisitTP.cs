@@ -6,17 +6,6 @@ namespace BeautyShop.Core
 {
     public class VisitTP
     {
-        public List<double> Total { get; set; }
-        public List<ShopItem> ShopItems { get; set; }
-        public VisitTP()
-        {
-            ShopItems = new List<ShopItem>();
-            Total = new List<double>();
-        }
-        public void AddShopItem(ShopItem shopItem)
-        {
-            ShopItems.Add(shopItem);
-        }
         public double TotalPrice(Visit visit)
         {
             var total = 0.0;

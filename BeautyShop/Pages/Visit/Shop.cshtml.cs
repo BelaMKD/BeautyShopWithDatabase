@@ -15,22 +15,21 @@ namespace BeautyShop
     {
         private readonly IVisit visitData;
         private readonly ICustomer customerData;
+        private readonly VisitTP visitTP;
 
         [BindProperty]
         public Visit Visit { get; set; }
-        [BindProperty]
-        public VisitTP VisitTP { get; set; }
         public List<SelectListItem> Customers { get; set; }
         public string Message { get; set; }
-        public ShopModel(IVisit visitData, ICustomer customerData)
+        public ShopModel(IVisit visitData, ICustomer customerData, VisitTP visitTP)
         {
             this.visitData = visitData;
             this.customerData = customerData;
+            this.visitTP = visitTP;
         }
         public void OnGet()
         {
             Visit = new Visit();
-            VisitTP = new VisitTP();
             Customers = customerData.GetCustomers().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
@@ -50,7 +49,6 @@ namespace BeautyShop
                         ItemType = ItemType.Product,
                         Price = priceProduct.Value
                     };
-                    VisitTP.AddShopItem(shopItem);
                     Visit.ShopItems.Add(shopItem);
                 }
                 if (priceService > 0 && priceService.HasValue)
@@ -60,12 +58,10 @@ namespace BeautyShop
                         ItemType = ItemType.Service,
                         Price = priceService.Value
                     };
-                    VisitTP.AddShopItem(shopItem);
                     Visit.ShopItems.Add(shopItem);
                 }
-                VisitTP.Total.Add(VisitTP.TotalPrice(Visit));
             }
-            Message = Visit.CustomerId == null ? "No customer selected!" : $"Total pay: {VisitTP.Total.Sum()}";
+            Message = Visit.CustomerId == null ? "No customer selected!" : $"Total pay: {visitTP.TotalPrice(Visit)}";
             Customers = customerData.GetCustomers().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
@@ -79,9 +75,7 @@ namespace BeautyShop
                 
                 var customer = customerData.GetCustomer(Visit.CustomerId.Value);
                 Visit.Customer = customer;
-                Visit.ShopItems = VisitTP.ShopItems;
-                Visit.Pay = VisitTP.Total.Sum();
-                if (Visit.Pay == 0)
+                if (visitTP.TotalPrice(Visit)==0)
                 {
                     TempData["Message2"] = "Please buy something next time !";
                     return RedirectToPage("./List");

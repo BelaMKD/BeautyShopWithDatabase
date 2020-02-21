@@ -29,14 +29,11 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary" asp-page-handler="">Done</button>
-    @for (int i = 0; i < Model.VisitTP.ShopItems.Count; i++)
+    @for (int i = 0; i < Model.Visit.ShopItems.Count; i++)
     {
-        <input type="hidden" asp-for="VisitTP.ShopItems[i].Price" />
-    }
-    @for (int i = 0; i < Model.VisitTP.Total.Count; i++)
-    {
-        <input type="hidden" asp-for="VisitTP.Total[i]" />
-    }
+        <input type="hidden" asp-for="Visit.ShopItems[i].Price" />
+        <input type="hidden" asp-for="Visit.ShopItems[i].ItemType" />
+        }
 </form>
 @if (Model.Message != null)
 {
