@@ -16,7 +16,5 @@ namespace BeautyShop.Core
         public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
         public List<ShopItem> ShopItems { get; set; }
-        public double Pay { get; set; }
-
     }
 }
