@@ -1,0 +1,26 @@
+﻿@page
+@model BeautyShop.Pages.MembrshipsModel
+@{
+    ViewData["Title"] = "Membrships";
+}
+
+<table style="margin:10% auto" class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Membrship Type</th>
+      <th scope="col">Product Discount</th>
+      <th scope="col">Service Discount</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var membrship in Model.Membrships)
+    {
+        <tr>
+            <td>@membrship.Type</td>
+            <td>@membrship.DiscountProduct.ToString("P")</td>
+            <td>@membrship.DiscountService.ToString("P")</td>
+        </tr>
+    }
+  </tbody>
+</table>
+

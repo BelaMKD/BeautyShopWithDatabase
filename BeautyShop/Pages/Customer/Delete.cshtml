@@ -1,0 +1,12 @@
+﻿@page "{id:int}"
+@model BeautyShop.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Are you sure you want to delete customer @Model.Customer.Name ?</h1>
+<form method="post">
+    <button type="submit" class="btn btn-danger btn-lg">Yes</button>
+    <a class="btn btn-primary btn-lg" asp-page="./List">No</a>
+</form>
+

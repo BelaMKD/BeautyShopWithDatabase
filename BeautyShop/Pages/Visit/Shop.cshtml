@@ -1,0 +1,44 @@
+﻿@page
+@model BeautyShop.ShopModel
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<h1>Shop</h1>
+
+<a class="btn btn-info" asp-page="/Customer/Edit">Add New Customer</a>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Visit.CustomerId"></label>
+        <select class="form-control" asp-for="Visit.CustomerId" asp-items="Model.Customers">
+            <option value="">Pick a customer</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Visit.CustomerId"></span>
+    </div>
+    <div class="form-row ">
+        <div class="form-group col-sm-5">
+            <label>Buy Product</label>
+            <input type="number" class="form-control" name="priceProduct">
+        </div>
+        <div class="form-group col-sm-5">
+            <label>Buy Service</label>
+            <input type="number" class="form-control" name="priceService">
+        </div>
+        <div class="form-group col-sm-2 d-flex">
+            <button type="submit" class="btn btn-success" asp-page-handler="Buy">Buy</button>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" asp-page-handler="">Done</button>
+    @for (int i = 0; i < Model.VisitTP.ShopItems.Count; i++)
+    {
+        <input type="hidden" asp-for="VisitTP.ShopItems[i].Price" />
+    }
+    @for (int i = 0; i < Model.VisitTP.Total.Count; i++)
+    {
+        <input type="hidden" asp-for="VisitTP.Total[i]" />
+    }
+</form>
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}

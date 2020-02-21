@@ -1,0 +1,71 @@
+﻿@page
+@model BeautyShop.Pages.Visit.ListModel
+@{
+    ViewData["Title"] = "List";
+    var x = 1;
+    var y = 1;
+}
+
+<h1>List of Visits</h1>
+
+<a style="margin:3% auto" class="btn btn-success" asp-page="./Shop">Shop Now</a>
+<form method="get">
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search by Customer" asp-for="SearchName">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+    </div>
+</div>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Membership Type</th>
+            <th scope="col">Pay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var visit in Model.Visits)
+        {
+            <tr>
+                <td>@x</td>
+                <td>@visit.Customer.Name</td>
+                <td>@visit.Customer.Membership?.Type</td>
+                <td>$ @visit.Pay</td>
+            </tr>
+            x++;
+        }
+    </tbody>
+</table>
+<div style="margin:4% auto; visibility:@(Model.Visits.Any()?"visible":"hidden")">
+    <h3>Total pay by customer:</h3>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Membership Type</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var visit in Model.Visits.GroupBy(x => x.Customer.Id))
+            {
+                <tr>
+                    <td>@y</td>
+                    <td>@visit.First().Customer.Name</td>
+                    <td>@visit.First().Customer.Membership?.Type</td>
+                    <td>$ @visit.Sum(x => x.Pay)</td>
+                </tr>
+                y++;
+            }
+        </tbody>
+    </table>
+</div>
+</form>
+@if (Model.Message2!=null)
+{
+    <div class="alert alert-success">@Model.Message2</div>
+}
