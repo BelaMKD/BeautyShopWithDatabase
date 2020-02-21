@@ -7,7 +7,12 @@
 
 <h1>List of Customers</h1>
 
-<form method="get">
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<form style="margin:20px auto" method="get">
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Search by Customer" asp-for="SearchName">
         <div class="input-group-append">
@@ -21,6 +26,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Membership Type</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -37,12 +43,14 @@
                 x++;
             }
         </tbody>
+        <tfoot style="visibility:@(Model.Customers.Any()?"hidden":"visible")">
+            <tr>
+                <td colspan="5" class="alert alert-danger">There are no Customers!</td>
+            </tr>
+        </tfoot>
     </table>
 </form>
 <a class="btn btn-success" asp-page="./Edit">Add New Customer</a>
 
-@if (Model.Message != null)
-{
-    <div class="alert alert-info">@Model.Message</div>
-}
+
 

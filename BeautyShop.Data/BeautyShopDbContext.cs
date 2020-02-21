@@ -11,6 +11,7 @@ namespace BeautyShop.Data
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Visit> Visits { get; set; }
+        public DbSet<ShopItem> ShopItems { get; set; }
         public BeautyShopDbContext(DbContextOptions<BeautyShopDbContext> options) : base(options)
         {
 

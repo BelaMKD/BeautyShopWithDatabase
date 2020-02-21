@@ -53,12 +53,12 @@ namespace BeautyShop
                 if (Customer.Id != 0)
                 {
                     Customer = customerData.Update(Customer);
-                    TempData["Message"] = "Customer is updated!";
+                    TempData["Message"] = "Customer is updated !";
                 }
                 else
                 {
                     Customer = customerData.Add(Customer);
-                    TempData["Message"] = "New Customer is added!";
+                    TempData["Message"] = "New Customer is added !";
                 }
                 customerData.Commit();
                 return RedirectToPage("./List");

@@ -81,9 +81,14 @@ namespace BeautyShop
                 Visit.Customer = customer;
                 Visit.ShopItems = VisitTP.ShopItems;
                 Visit.Pay = VisitTP.Total.Sum();
+                if (Visit.Pay == 0)
+                {
+                    TempData["Message2"] = "Please buy something next time !";
+                    return RedirectToPage("./List");
+                }
                 Visit = visitData.Add(Visit);
                 visitData.Commit();
-                TempData["Message2"] = "Thank you for your purchase!";
+                TempData["Message2"] = "Thank you for your purchase !";
 
                 return RedirectToPage("./List");
             }
